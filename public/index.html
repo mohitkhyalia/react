@@ -2,13 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Wish According to Trend"
     />
+    
+<script>
+import 'react-social-login-buttons/dist/react-social-login-buttons.css';
+
+</script>
+
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -24,20 +30,61 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>HBD</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <audio id="myAudio" preload="auto" src="https://drive.google.com/uc?id=1IhgDAlAT3TG3wrjr2VVL05LQleFSdocG"></audio>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.12.0/tsparticles.confetti.bundle.min.js"></script>
+    <script>
+      
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+let skew = 1;
+const duration = 15 * 1000,
+  animationEnd = Date.now() + duration,
+  defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+function randomInRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+(function frame() {
+  const timeLeft = animationEnd - Date.now(),
+    ticks = Math.max(200, 500 * (timeLeft / duration));
+
+  skew = Math.max(0.8, skew - 0.001);
+
+  confetti({
+    particleCount: 1,
+    startVelocity: 0,
+    ticks: ticks,
+    origin: {
+      x: Math.random(),
+      // since particles fall down, skew start toward the top
+      y: Math.random() * skew - 0.2,
+    },
+    colors: ["#ffffff"],
+    shapes: ["circle"],
+    gravity: randomInRange(0.4, 0.6),
+    scalar: randomInRange(0.4, 1),
+    drift: randomInRange(-0.4, 0.4),
+  });
+
+  if (timeLeft > 0) {
+    requestAnimationFrame(frame);
+  }
+})();
+
+const canvas = document.getElementById("confettiCanvas");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const durationt = 10000; // Set your desired animation duration here (10 seconds)
+
+
+
+
+
+    </script>
   </body>
 </html>
